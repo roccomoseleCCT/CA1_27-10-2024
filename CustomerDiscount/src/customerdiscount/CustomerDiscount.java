@@ -14,9 +14,6 @@ import java.io.IOException;
  */
 public class CustomerDiscount {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args){
         // Initialize path input 
         String inputFile="C:\\Users\\User\\Desktop\\CCT\\CCT Monday\\CA1_27-10-2024\\CustomerDiscount\\src\\customerdiscount\\customer.txt";
@@ -24,7 +21,16 @@ public class CustomerDiscount {
         String outputFile="C:\\Users\\User\\Desktop\\CCT\\CCT Monday\\CA1_27-10-2024\\CustomerDiscount\\src\\customerdiscount\\customerdiscount.txt";
         //Reading of the input file using the try because could generate a FileNotFoundException
         try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
-            
+            //Initialize the four lines of a customer
+            String firstLine, secondLine, thirdLine, fourthLine;
+            //Loop that read four lines of the file and split the line in the appropiate four variables
+            while((firstLine=br.readLine()) != null){
+                secondLine=br.readLine();
+                thirdLine=br.readLine();
+                fourthLine=br.readLine();
+                
+                
+            }
         } catch(IOException e){
             //Print the error message in case there are some mistakes with the files
             e.printStackTrace();
