@@ -29,6 +29,8 @@ public class CustomerDiscount {
                 thirdLine=br.readLine();
                 fourthLine=br.readLine();
                 
+                //Validation of the four lines
+                boolean boh = isValidCustomer(firstLine, secondLine, thirdLine, fourthLine);
                 
             }
         } catch(IOException e){
@@ -39,4 +41,50 @@ public class CustomerDiscount {
         
     }
     
+    //Boolean method that validate the four lines and controll if it's a valid customer, if not return false and 
+    // an appropiate message
+    public static boolean isValidCustomer(String firstLine, String secondLine, String thirdLine, String fourthLine){
+        //Validation second line total purchase as double
+        //Using the Double class I'll try to parse the line in double 
+        try{
+            Double.parseDouble(secondLine);
+        }catch(NumberFormatException e){
+            System.out.println("The total purchase of the customer "+firstLine+" is not double and "
+                    + "produced the following error: "+e.getMessage());
+            return false;
+        }
+        
+        //Validation third line class as a Integer a number between 1 and 3
+        //USing the Integer class I'll try to parse the line in int and after that I'll controll if is beetween 1 and 3
+        try{
+            int classCustomer = Integer.parseInt(thirdLine);
+            if (classCustomer<1 ||classCustomer>3){
+               System.out.println("The class of the customer "+firstLine+" is not in a range between 1 and 3");
+                return false; 
+            }
+        }catch(NumberFormatException e){
+            System.out.println("The class of the customer "+firstLine+" is not integer and "
+                    + "produced the following error: "+e.getMessage());
+            return false;
+        }
+        
+        //Validation of the four line as a valid year, so need to be a Integer of four digits and in a reasonable range       
+        try{
+            int yearCustomer=Integer.parseInt(fourthLine);
+            //Control if it's four digits 
+            if (yearCustomer<1000 || yearCustomer>9999){
+               System.out.println("The year of the customer "+firstLine+" is not 4 digits");
+               return false; 
+                
+            }
+        }catch(NumberFormatException e){
+             System.out.println("The year of the customer "+firstLine+" is not integer and "
+                    + "produced the following error: "+e.getMessage());
+            return false;
+        }
+        
+        
+        
+        return true;
+    }
 }
