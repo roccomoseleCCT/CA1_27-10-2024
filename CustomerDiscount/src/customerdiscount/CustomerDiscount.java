@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.Year;
 import java.util.regex.Pattern;
 
 /**
@@ -17,7 +18,7 @@ public class CustomerDiscount {
 
     public static void main(String[] args){
         // Initialize path input 
-        String inputFile="C:\\Users\\User\\Desktop\\CCT\\CCT Monday\\CA1_27-10-2024\\CustomerDiscount\\src\\customerdiscount\\customer.txt";
+        String inputFile="C:\\Users\\User\\Desktop\\CCT\\CCT Monday\\CA1_27-10-2024\\CustomerDiscount\\src\\customerdiscount\\customers.txt";
         //Initialize path output
         String outputFile="C:\\Users\\User\\Desktop\\CCT\\CCT Monday\\CA1_27-10-2024\\CustomerDiscount\\src\\customerdiscount\\customerdiscount.txt";
         //Reading of the input file using the try because could generate a FileNotFoundException
@@ -41,6 +42,8 @@ public class CustomerDiscount {
                     int customerClass=Integer.parseInt(thirdLine);
                     int lastPurchase=Integer.parseInt(fourthLine);
                     
+                    //Calculation of the discount following the criteria in the assesment
+                    double totalDiscount = calcDiscount(totalPurchase, customerClass, lastPurchase);
                 }
                 
             }
@@ -51,6 +54,43 @@ public class CustomerDiscount {
         
         
     }
+    
+    //Creation of the method to calculate the discount 
+    public static double calcDiscount(double totalPurchase, int customerClass, int lastPurchase){
+        //Retrievement of the current year
+        int currentYear = Year.now().getValue();
+        System.out.println(currentYear);
+        double discount = 0;
+        //Following the criteria in the assesment I check the discount for the class and year of the last purchase 
+        // for every customer
+        switch (customerClass) {
+            case 1:
+                if (lastPurchase == currentYear) {
+                    discount = 0.30;
+                } else if (lastPurchase >= currentYear - 5) {
+                    discount = 0.20;
+                } else {
+                    discount = 0.10;
+                }   break;
+            case 2:
+                if (lastPurchase == currentYear) {
+                    discount = 0.15;
+                } else if (lastPurchase >= currentYear - 5) {
+                    discount = 0.13;
+                } else {
+                    discount = 0.05;
+                }   break;
+            case 3:
+                if (lastPurchase == currentYear) {
+                    discount = 0.03;
+                }   break;
+            default:
+                break;
+        }
+         // Calculate final value after the following the criteria of the discount
+        return totalPurchase * (1 - discount);
+    }
+    
     
     //Boolean method that validate the four lines and controll if it's a valid customer, if not return false and 
     // an appropiate message
