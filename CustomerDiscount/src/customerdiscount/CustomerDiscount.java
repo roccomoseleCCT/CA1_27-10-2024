@@ -5,8 +5,10 @@
 package customerdiscount;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.Year;
 import java.util.regex.Pattern;
@@ -22,7 +24,9 @@ public class CustomerDiscount {
         //Initialize path output
         String outputFile="C:\\Users\\User\\Desktop\\CCT\\CCT Monday\\CA1_27-10-2024\\CustomerDiscount\\src\\customerdiscount\\customerdiscount.txt";
         //Reading of the input file using the try because could generate a FileNotFoundException
-        try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
+        //Initialize the buffered to write in the output file 
+        try (BufferedReader br = new BufferedReader(new FileReader(inputFile));
+             BufferedWriter wr = new BufferedWriter(new FileWriter(outputFile, true))) {
             //Initialize the four lines of a customer
             String firstLine, secondLine, thirdLine, fourthLine;
             //Loop that read four lines of the file and split the line in the appropiate four variables
@@ -41,9 +45,15 @@ public class CustomerDiscount {
                     double totalPurchase=Double.parseDouble(secondLine);
                     int customerClass=Integer.parseInt(thirdLine);
                     int lastPurchase=Integer.parseInt(fourthLine);
-                    
                     //Calculation of the discount following the criteria in the assesment
                     double totalDiscount = calcDiscount(totalPurchase, customerClass, lastPurchase);
+                                     
+                    // Write the output file
+                    wr.write(name + " - " + surname);
+                    wr.newLine();
+                    wr.write(String.valueOf(totalDiscount));
+                    wr.newLine();  
+                    
                 }
                 
             }
@@ -51,15 +61,12 @@ public class CustomerDiscount {
             //Print the error message in case there are some mistakes with the files
             e.printStackTrace();
         }
-        
-        
     }
     
     //Creation of the method to calculate the discount 
     public static double calcDiscount(double totalPurchase, int customerClass, int lastPurchase){
         //Retrievement of the current year
         int currentYear = Year.now().getValue();
-        System.out.println(currentYear);
         double discount = 0;
         //Following the criteria in the assesment I check the discount for the class and year of the last purchase 
         // for every customer
