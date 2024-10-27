@@ -18,6 +18,10 @@ import java.util.regex.Pattern;
  */
 public class CustomerDiscount {
 
+    /*
+     Link to my github with the regulars commit :
+     https://github.com/roccomoseleCCT/CA1_27-10-2024
+    */
     public static void main(String[] args){
         // Initialize path input 
         String inputFile="C:\\Users\\User\\Desktop\\CCT\\CCT Monday\\CA1_27-10-2024\\CustomerDiscount\\src\\customerdiscount\\customers.txt";
