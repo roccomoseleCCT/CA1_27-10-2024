@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 /**
  * @author Rocco Mosele 27/10/2024
@@ -83,8 +84,28 @@ public class CustomerDiscount {
             return false;
         }
         
-        
-        
+       //Validation of the name and surname usign the regular expressions 
+       //I took inspiration from the site https://www.w3schools.com/java/java_regex.asp 
+       try{
+            //I try to split in an array the name and surname, if doesn't work mean it isnt' separate from a space
+            String[] nameSurname = firstLine.split(" ");
+            String name = nameSurname[0];
+            String surname = nameSurname[1];
+            //Using regular expression lower and upper letter 
+             if (!Pattern.matches("^[a-zA-Z]+$", name)){
+                 System.out.println("The name of the customer "+name+" isn't letters only");
+                 return false;
+             }
+             //Using regular expression lower and upper letter and numbers 
+             if (!Pattern.matches("^[a-zA-Z0-9]+$", surname)){
+                 System.out.println("The surname of the customer "+surname+" isn't letters and numbers only");
+                 return false;
+             }
+       }catch(Exception e){
+           System.out.println("The name and surname of the customer "+firstLine+" aren't "
+                    + "separate by a space");
+            return false;
+       }
         return true;
     }
 }
