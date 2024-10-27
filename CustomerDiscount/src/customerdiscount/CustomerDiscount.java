@@ -31,7 +31,17 @@ public class CustomerDiscount {
                 fourthLine=br.readLine();
                 
                 //Validation of the four lines
-                boolean boh = isValidCustomer(firstLine, secondLine, thirdLine, fourthLine);
+                if (isValidCustomer(firstLine, secondLine, thirdLine, fourthLine)){
+                    //ASsign of the four variables after the control 
+                    //Split of the name and surname using an array, already control the existence of the space in the validation method             
+                    String[] nameSurname = firstLine.split(" ");
+                    String name = nameSurname[0];
+                    String surname = nameSurname[1];
+                    double totalPurchase=Double.parseDouble(secondLine);
+                    int customerClass=Integer.parseInt(thirdLine);
+                    int lastPurchase=Integer.parseInt(fourthLine);
+                    
+                }
                 
             }
         } catch(IOException e){
